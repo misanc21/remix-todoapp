@@ -1,3 +1,4 @@
+import { SignedIn, SignedOut } from "@clerk/remix";
 import type { V2_MetaFunction } from "@remix-run/node";
 import { Link } from "react-router-dom";
 
@@ -14,13 +15,20 @@ export default function Index() {
       <h1 className="text-7xl mx-auto font-extrabold">My To-do App</h1>
       <h2 className=" mx-auto"> the new best way to note!</h2>
       <div className="mx-auto text-gray-700">
-        <Link to="/login" className="hover:text-gray-300">
-          Login
-        </Link>
-        <span>/</span>
-        <Link to="/register" className="hover:text-gray-300">
-          Signup
-        </Link>
+        <SignedOut>
+          <Link to="/login" className="hover:text-gray-300">
+            Login
+          </Link>
+          <span> / </span>
+          <Link to="/register" className="hover:text-gray-300">
+            Signup
+          </Link>
+        </SignedOut>
+        <SignedIn>
+          <Link to="/Home" className="hover:text-gray-300">
+            Go to my notes
+          </Link>
+        </SignedIn>
       </div>
     </div>
   );
