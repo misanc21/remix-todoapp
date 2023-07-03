@@ -11,6 +11,7 @@ import {
 } from "@remix-run/react";
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
 import { ClerkApp, ClerkCatchBoundary } from "@clerk/remix";
+import { Navbar } from "~/components/Navbar";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -18,6 +19,7 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader: LoaderFunction = (args) => rootAuthLoader(args);
+export const CatchBoundary = ClerkCatchBoundary();
 
 function App() {
   return (
@@ -28,7 +30,8 @@ function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-gradient-to-r from-indigo-500 to-blue-500">
+      <body className="bg-gradient-to-r from-indigo-500 to-blue-500 font-nunito">
+        <Navbar />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
@@ -39,4 +42,3 @@ function App() {
 }
 
 export default ClerkApp(App);
-export const CatchBoundary = ClerkCatchBoundary();
