@@ -1,9 +1,9 @@
 import { getAuth } from "@clerk/remix/ssr.server";
-import { type DataFunctionArgs, json } from "@remix-run/node";
+import { type DataFunctionArgs, json, redirect } from "@remix-run/node";
 import { z } from "zod";
 import CreateNote from "~/components/CreateNote";
 import Notes from "~/components/Notes";
-import { getAllNotes, createNote } from "~/models/note.server";
+import { getAllNotes, createNote, deleteNote } from "~/models/note.server";
 
 export async function loader(args: DataFunctionArgs) {
   const notes = await getAllNotes();
@@ -11,12 +11,10 @@ export async function loader(args: DataFunctionArgs) {
 }
 
 export async function action(args: DataFunctionArgs) {
-  console.log("que oediiii");
   const formData = await args.request.formData();
   const { userId } = await getAuth(args);
   if (args.request.method == "POST") {
     const note = formData.get("create-note");
-    console.log(note);
     const noteSchema = z.object({
       title: z.string().nonempty(),
       user: z.string().nonempty(),
@@ -27,6 +25,13 @@ export async function action(args: DataFunctionArgs) {
     });
     await createNote(payload);
     return json({ msg: "nota creada" }, { status: 201 });
+  }
+
+  if (args.request.method == "DELETE") {
+    const idNote = Number(formData.get("noteId"));
+    console.log("entra a delete");
+    await deleteNote(idNote);
+    return redirect("/home");
   }
 }
 

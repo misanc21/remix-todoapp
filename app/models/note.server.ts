@@ -8,3 +8,9 @@ export async function getAllNotes(){
 export async function createNote(data:NoteType){
   return db.note.create({data});
 }
+
+export async function deleteNote(id:number){
+  return db.note.delete({where : {
+    id:id
+  }})
+}
