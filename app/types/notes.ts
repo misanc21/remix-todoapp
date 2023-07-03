@@ -6,5 +6,10 @@ export interface NoteType  {
 }
 
 export interface NoteId {
-  idNote:Note['id']
+  idNote:Note['id'],
+  doneNote?:Note['done']
+  noteTitle?:Note['title']
+  open?:any;
+  setOpen?:any;
+  titleNote?:any
 }

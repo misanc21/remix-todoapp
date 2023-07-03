@@ -14,3 +14,24 @@ export async function deleteNote(id:number){
     id:id
   }})
 }
+
+export async function markCheckbox(id:number, done:boolean){
+  return db.note.update({
+   where:{
+    id:id
+   },
+   data:{
+    done:done
+   }
+  })
+}
+
+export async function getNoteById(id:number){
+  return db.note.findFirst({
+    where:{id:id},
+    select:{
+      id: true,
+      title:true
+    }
+  })
+}
