@@ -12,7 +12,9 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   return (
     <div className="container mx-auto flex flex-col justify-center min-h-screen text-gray-100">
-      <h1 className="text-7xl mx-auto font-extrabold">My To-do App</h1>
+      <h1 className="text-5xl sm:text-7xl mx-auto font-extrabold">
+        My To-do App
+      </h1>
       <h2 className=" mx-auto"> the new best way to note!</h2>
       <div className="mx-auto text-gray-700">
         <SignedOut>

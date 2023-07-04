@@ -4,7 +4,6 @@ import * as React from "react";
 
 export default function CreateNote() {
   const { user } = useUser();
-  console.log(user);
   const formRef = React.useRef<HTMLFormElement>(null);
   const navigation = useNavigation();
   React.useEffect(() => {
@@ -19,8 +18,8 @@ export default function CreateNote() {
   return (
     <>
       <Form action="/home" method="POST" ref={formRef}>
-        <div className="mx-40 py-10 flex flex-col">
-          <h3 className="block text-5xl leading-6 text-slate-100 text-center mb-12 font-bold">
+        <div className="sm:mx-40 mx-7 py-10 flex flex-col">
+          <h3 className="block text-3xl md:text-5xl leading-6 text-slate-100 text-center mb-12 font-bold">
             Hi {user?.firstName}
           </h3>
           <label
