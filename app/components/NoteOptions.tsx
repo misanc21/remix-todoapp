@@ -10,6 +10,7 @@ const NoteOptions: React.FC<NoteId> = ({
   open,
   setOpen,
   noteTitle,
+  doneNote,
 }) => {
   function classNames({ classes = [] }: { classes?: any[] } = {}) {
     return classes.filter(Boolean).join(" ");
@@ -33,30 +34,32 @@ const NoteOptions: React.FC<NoteId> = ({
           >
             <Menu.Items className="absolute right-9 top-px z-10 -mr-1 mt-2 w-20 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-1">
-                <Menu.Item>
-                  {({ active }) => (
-                    <button
-                      className={classNames({
-                        classes: [
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm",
-                        ],
-                      })}
-                      onClick={() => {
-                        setOpen({
-                          ...open,
-                          open: !open.open,
-                          title: noteTitle,
-                          id: idNote,
-                        });
-                      }}
-                    >
-                      Edit
-                    </button>
-                  )}
-                </Menu.Item>
+                {!doneNote && (
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        className={classNames({
+                          classes: [
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm",
+                          ],
+                        })}
+                        onClick={() => {
+                          setOpen({
+                            ...open,
+                            open: !open.open,
+                            title: noteTitle,
+                            id: idNote,
+                          });
+                        }}
+                      >
+                        Edit
+                      </button>
+                    )}
+                  </Menu.Item>
+                )}
                 <Menu.Item>
                   {({ active }) => (
                     <Form method="DELETE" action="/home">

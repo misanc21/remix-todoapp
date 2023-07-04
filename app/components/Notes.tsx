@@ -21,6 +21,7 @@ const Notes = ({ open, setOpen }: any) => {
                 open={open}
                 setOpen={setOpen}
                 noteTitle={note.title}
+                doneNote={note.done}
               />
               <Checkbox idNote={note.id} doneNote={note.done} />
             </div>
