@@ -6,7 +6,7 @@ import CreateNote from "~/components/CreateNote";
 import EditModal from "~/components/EditModal";
 import Notes from "~/components/Notes";
 import {
-  getAllNotes,
+  getAllNotesByIdUser,
   createNote,
   deleteNote,
   markCheckbox,
@@ -14,7 +14,9 @@ import {
 } from "~/models/note.server";
 
 export async function loader(args: DataFunctionArgs) {
-  const notes = await getAllNotes();
+  const { userId } = await getAuth(args);
+  console.log(`usuerid: ${userId}`);
+  const notes = await getAllNotesByIdUser(userId);
   const url = new URL(args.request.url);
   const checkboxId = url.searchParams.get("checkboxId");
   if (checkboxId) {

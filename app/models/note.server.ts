@@ -5,6 +5,15 @@ export async function getAllNotes(){
   return notes;
 }
 
+export async function getAllNotesByIdUser(userId:string){
+  const notes = await db.note.findMany({
+    where: {user: userId},
+    orderBy: {'createdAt':'desc'}
+  });
+
+  return notes;
+}
+
 export async function createNote(data:NoteType){
   return db.note.create({data});
 }
