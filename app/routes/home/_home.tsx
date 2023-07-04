@@ -15,7 +15,7 @@ import {
 
 export async function loader(args: DataFunctionArgs) {
   const { userId } = await getAuth(args);
-  console.log(`usuerid: ${userId}`);
+  if (!userId) return redirect("/");
   const notes = await getAllNotesByIdUser(userId);
   const url = new URL(args.request.url);
   const checkboxId = url.searchParams.get("checkboxId");
