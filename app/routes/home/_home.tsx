@@ -10,7 +10,7 @@ import {
   createNote,
   deleteNote,
   markCheckbox,
-  getNoteById,
+  updateById,
 } from "~/models/note.server";
 
 export async function loader(args: DataFunctionArgs) {
@@ -27,34 +27,38 @@ export async function loader(args: DataFunctionArgs) {
       json({ notes, msg: "nota actualizada", status: 201 }), redirect("/home")
     );
   }
-  const getNoteToUpdate = url.searchParams.get("getNoteId");
-  if (getNoteToUpdate) {
-    const idToUpdate = Number(getNoteToUpdate);
-    const noteGotten = await getNoteById(idToUpdate);
-    return json(
-      { notes, msg: "nota obtenida", status: 201, noteGotten },
-      redirect("/home")
-    );
-  }
 
-  return json({ notes, noteGotten: { id: "", title: "" } });
+  return json({ notes });
 }
 
 export async function action(args: DataFunctionArgs) {
   const formData = await args.request.formData();
   const { userId } = await getAuth(args);
+  const noteSchema = z.object({
+    title: z.string().nonempty(),
+    user: z.string().nonempty(),
+  });
+
   if (args.request.method == "POST") {
     const note = formData.get("create-note");
-    const noteSchema = z.object({
-      title: z.string().nonempty(),
-      user: z.string().nonempty(),
-    });
     const payload = noteSchema.parse({
       title: note,
       user: userId,
     });
     await createNote(payload);
     return json({ msg: "nota creada" }, { status: 201 });
+  }
+
+  if (args.request.method == "PUT") {
+    const newTitle = formData.get("updated-note");
+    const idToUpdate = formData.get("updated-id");
+    console.log(idToUpdate);
+    const payload = noteSchema.parse({
+      title: newTitle,
+      user: idToUpdate,
+    });
+    await updateById(payload);
+    return json({ msg: "nota actualizada" }, { status: 201 });
   }
 
   if (args.request.method == "DELETE") {

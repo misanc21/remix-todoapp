@@ -1,6 +1,7 @@
 import type {Note } from "@prisma/client"
 
 export interface NoteType  {
+  id?:Note['id'],
   title: Note['title'],
   user: Note['user'],
 }

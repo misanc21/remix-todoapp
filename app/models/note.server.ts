@@ -35,3 +35,10 @@ export async function getNoteById(id:number){
     }
   })
 }
+
+export async function updateById(newData:NoteType){
+  return db.note.update({
+    where: {id:Number(newData.user)},
+    data: {title: newData.title}
+  })
+}
