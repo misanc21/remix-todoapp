@@ -8,7 +8,7 @@ const Notes = ({ open, setOpen }: any) => {
 
   if (!notes) return <h1>no hay notas jsjsjs</h1>;
   return (
-    <div className=" mx-auto flex justify-center sm:px-40 px-7 flex-col pt-24">
+    <div className=" mx-auto flex justify-center sm:px-40 px-7 flex-col pt-24 mb-16">
       <fieldset>
         <legend className="font-semibold leading-6 text-slate-200 text-center text-4xl">
           Your to-do's
