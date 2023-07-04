@@ -11,7 +11,7 @@ const Notes = ({ open, setOpen }: any) => {
     <div className=" mx-auto flex justify-center px-40 flex-col pt-24">
       <fieldset>
         <legend className="font-semibold leading-6 text-slate-200 text-center text-4xl">
-          My to-do's
+          Your to-do's
         </legend>
         <div className="mt-4 divide-y-2 divide-indigo-600 border-b-2 border-t-2 border-indigo-600">
           {notes.map((note) => (
