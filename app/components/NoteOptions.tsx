@@ -32,7 +32,7 @@ const NoteOptions: React.FC<NoteId> = ({
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute sm:right-9 left-9 top-px z-10 -mr-1 mt-2 w-20 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Items className="absolute md:right-9 top-px z-10  mt-2 w-20 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-1">
                 {!doneNote && (
                   <Menu.Item>
